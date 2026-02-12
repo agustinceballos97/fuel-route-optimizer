@@ -153,72 +153,75 @@ Dependency Injection: Decoupled services
 Clean Architecture: Separation of concerns
 
 Structure
+## 📂 Project Structure
+
+```text
 fuel-route-optimizer/
 
 ├── requirements.txt                 # Project dependencies
 ├── README.md                        # Project documentation
 ├── manage.py                        # Django CLI entry point
 │
-├── config/                          # Project configuration
-│   ├── __init__.py
-│   ├── settings.py                  # Django settings
+├── config/                          # Project configuration layer
+│   ├── __init__.py                  # Package initializer
+│   ├── settings.py                  # Django settings (DB, apps, middleware)
 │   ├── urls.py                      # Root URL configuration
-│   ├── wsgi.py                      # WSGI entry point (production)
+│   ├── wsgi.py                      # WSGI entry point (production servers)
 │   └── asgi.py                      # ASGI entry point (async support)
 │
 ├── optimizer/                       # Main application module
-│   ├── __init__.py
-│   ├── apps.py                      # App configuration
-│   ├── admin.py                     # Django admin configuration
+│   ├── __init__.py                  # Package initializer
+│   ├── apps.py                      # Django app configuration
+│   ├── admin.py                     # Django admin registration
 │   │
-│   ├── models/                      # Data models
-│   │   ├── __init__.py
-│   │   └── fuel_station.py          # FuelStation model definition
+│   ├── models/                      # Domain models layer
+│   │   ├── __init__.py              # Models package initializer
+│   │   └── fuel_station.py          # FuelStation entity definition
 │   │
 │   ├── repositories/                # Data access layer (Repository Pattern)
-│   │   ├── __init__.py
-│   │   └── fuel_station_repository.py  # Encapsulates DB queries
+│   │   ├── __init__.py              # Package initializer
+│   │   └── fuel_station_repository.py  # Encapsulates database queries
 │   │
 │   ├── services/                    # Business logic layer
-│   │   ├── __init__.py
+│   │   ├── __init__.py              # Package initializer
 │   │   ├── geocoding_service.py     # City → coordinates resolution
-│   │   ├── routing_service.py       # Route calculation via OpenRouteService
-│   │   ├── optimization_service.py  # Greedy optimization algorithm
-│   │   └── map_service.py           # Map and visualization logic
+│   │   ├── routing_service.py       # Route calculation (OpenRouteService)
+│   │   ├── optimization_service.py  # Greedy route optimization algorithm
+│   │   └── map_service.py           # Map building & visualization logic
 │   │
-│   ├── api/                         # REST API layer
-│   │   ├── __init__.py
+│   ├── api/                         # REST API layer (presentation layer)
+│   │   ├── __init__.py              # Package initializer
 │   │   ├── views.py                 # API endpoints
 │   │   ├── serializers.py           # Request/response validation
 │   │   └── urls.py                  # App-level routes
 │   │
-│   ├── utils/                       # Utility modules
-│   │   ├── __init__.py
-│   │   ├── distance.py              # Haversine & distance helpers
+│   ├── utils/                       # Shared utilities & helpers
+│   │   ├── __init__.py              # Package initializer
+│   │   ├── distance.py              # Haversine & distance calculations
 │   │   ├── validators.py            # Custom validation logic
-│   │   └── constants.py             # Shared constants/config
+│   │   └── constants.py             # Shared constants & config values
 │   │
 │   ├── management/                  # Custom Django management commands
-│   │   ├── __init__.py
-│   │   └── commands/
-│   │       ├── __init__.py
+│   │   ├── __init__.py              # Package initializer
+│   │   └── commands/                # CLI commands
+│   │       ├── __init__.py          # Commands package initializer
 │   │       ├── load_fuel_stations.py   # Load fuel data from CSV
-│   │       └── geocode_stations.py     # Bulk geocode stations
+│   │       └── geocode_stations.py     # Bulk geocode fuel stations
 │   │
-│   └── migrations/                  # Database migrations
-│       └── __init__.py
+│   └── migrations/                  # Database migration files
+│       └── __init__.py              # Migrations package initializer
 │
-├── static/                          # Frontend assets
+├── static/                          # Frontend assets (UI layer)
 │   ├── css/
-│   │   └── style.css                # Main styles
+│   │   └── style.css                # Application styling
 │   ├── js/
-│   │   ├── app.js                   # Frontend logic
-│   │   └── map.js                   # Leaflet map logic
-│   └── index.html                   # Main UI page
+│   │   ├── app.js                   # Frontend interaction logic
+│   │   └── map.js                   # Leaflet map rendering logic
+│   └── index.html                   # Main user interface page
 │
-└── data/
+└── data/                            # External datasets
     └── fuel-prices-for-be-assessment.csv  # Fuel price dataset
-
+```
     
 🧮 Optimization Algorithm
 Greedy Algorithm
