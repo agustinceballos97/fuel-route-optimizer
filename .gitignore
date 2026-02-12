@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+/staticfiles
+/static_collected
+
+# Environment variables
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+Thumbs.db
+*.bak
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# Project specific
+output.txt
+verify_api.py
+verify_long_route.py
+geocode_cache.json

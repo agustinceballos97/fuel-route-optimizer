@@ -1,0 +1,20 @@
+# Django Core
+Django==5.0.1
+djangorestframework==3.14.0
+
+# Environment & Configuration
+python-decouple==3.8
+
+# Geolocation & Mapping
+geopy==2.4.1
+folium==0.15.1
+
+# HTTP Requests
+requests==2.31.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.26.0
+
+# CORS (para desarrollo frontend)
+django-cors-headers==4.3.1

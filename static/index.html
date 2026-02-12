@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Route Optimizer</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="header">
+                <h1>⛽ Route Optimizer</h1>
+                <p>Find the cheapest fuel stops for your trip.</p>
+            </div>
+
+            <form id="route-form">
+                <div class="input-group">
+                    <label for="start">Start Location</label>
+                    <input type="text" id="start" placeholder="e.g. New York, NY" required value="New York, NY">
+                </div>
+
+                <div class="input-group">
+                    <label for="end">End Location</label>
+                    <input type="text" id="end" placeholder="e.g. Philadelphia, PA" required value="Philadelphia, PA">
+                </div>
+
+                <button type="submit" id="optimize-btn">
+                    <span class="btn-text">Optimize Route</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </form>
+
+            <div id="error-message" class="error-banner hidden"></div>
+
+            <!-- ==================== NEARBY STATIONS SECTION ==================== -->
+            <div class="nearby-section">
+                <h3 style="margin-bottom: 15px;">🔍 Find Nearby Stations</h3>
+                <div class="input-group">
+                    <label for="nearby-location">Location</label>
+                    <input type="text" id="nearby-location" placeholder="e.g. Chicago, IL">
+                </div>
+                <div class="input-group">
+                    <label for="nearby-radius">Radius (miles)</label>
+                    <input type="number" id="nearby-radius" placeholder="10" value="10" min="1" max="50">
+                </div>
+                <button type="button" id="search-nearby-btn" class="btn-secondary">
+                    <span class="btn-text">Search Nearby</span>
+                    <span class="nearby-loader loader hidden"></span>
+                </button>
+            </div>
+
+            <!-- Nearby Results Panel -->
+            <div id="nearby-results" class="hidden" style="margin-top: 20px;">
+                <h3>Nearby Stations (<span id="nearby-count">0</span>)</h3>
+                <ul id="nearby-list" class="stops-list">
+                    <!-- Nearby stations will be populated here -->
+                </ul>
+            </div>
+            <!-- ==================== END NEARBY SECTION ==================== -->
+
+            <!-- Route Optimization Results -->
+            <div id="results-panel" class="hidden">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-label">Total Cost</span>
+                        <span class="stat-value" id="total-cost">$0.00</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Distance</span>
+                        <span class="stat-value" id="total-dist">0 mi</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">Fuel Used</span>
+                        <span class="stat-value" id="fuel-used">0 gal</span>
+                    </div>
+                </div>
+
+                <h3>Suggested Stops</h3>
+                <ul id="stops-list" class="stops-list">
+                    <!-- Stops will be populated here -->
+                </ul>
+            </div>
+        </aside>
+
+        <main class="map-container">
+            <div id="map"></div>
+        </main>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Custom JS -->
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
